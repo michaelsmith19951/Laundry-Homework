@@ -28,6 +28,7 @@ def treat_stain
   sleep 2
 end
 live_loop :laundry_1 do
+  sync :tick
   wear(1)
   treat_stain if dirty?
   wash(60)
@@ -35,9 +36,19 @@ live_loop :laundry_1 do
   iron
 end
 live_loop :laundry_2 do
+  sync :tick
   wear(5)
   treat_stain if dirty?
   wash(90)
   dry(:elec_cymbal)
 end
-
+live_loop :time do
+  sync :tick
+  sample :drum_bass_hard
+  sleep 0.5
+  sample :drum_snare_hard
+  sleep 0.5
+end
+live_loop :tick do
+  sleep 1
+end
